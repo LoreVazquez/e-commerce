@@ -11,9 +11,6 @@ font-family: 'Acme', sans-serif;*/
 .c-center{
     height: 70%;
 }
-.fit-content{
-    height: 100%;
-}
 
 .s-padding{
     padding: 0%;
@@ -26,4 +23,16 @@ font-family: 'Acme', sans-serif;*/
 .s-margin{
     margin: 0%;
     display: inline-block;
+}
+
+.single-page{
+	height: 60vh;
+}
+
+.mar{
+	margin-top: 30vh;
+}
+
+.mar-b{
+	margin-bottom: 10vh;
 }

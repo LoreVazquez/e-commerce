@@ -52,7 +52,71 @@
                 </div>
             </div>
     </header>
-   
+    <!-- ##### Single Product Details Area Start ##### -->
+    <section id="singlePage" class="single_product_details_area d-flex align-items-center row col-2 d-none">
+        <div id="container-Page" class= "col-12" ></div>
+
+        <div id="paypal" class="col-2 offset-7 mar-b d-none">
+
+            <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+                <div id="paypal-button-container" class=""></div>
+                <script>
+                
+                    // Render the PayPal button
+                
+                    paypal.Button.render({
+                
+                        // Set your environment
+                
+                        env: 'sandbox', // sandbox | production
+                
+                        // Specify the style of the button
+                
+                        style: {
+                            label: 'pay',
+                            size:  'small', // small | medium | large | responsive
+                            shape: 'rect',   // pill | rect
+                            color: 'gold'   // gold | blue | silver | black
+                        },
+                
+                        // PayPal Client IDs - replace with your own
+                        // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+                
+                        client: {
+                            sandbox:    'AV8_vZm6Mb7KEEQ2Anir0wUF6p6lpmdXmWXEpkDEE2zNpKJS6PtB22vDgX6h6tMYIBAXcQqom1w6N3Jw',
+                            production: '<insert production client id>'
+                        },
+                
+                        // Show the buyer a 'Pay Now' button in the checkout flow
+                        commit: true,
+                        
+                        // Wait for the PayPal button to be clicked
+                        payment: function(data, actions) {
+                        return actions.payment.create({
+                            payment: {
+                                transactions: [
+                                    {
+                                        amount: { total: '0.01', currency: 'USD' }
+                                    }
+                                ]
+                            }
+                        });
+                    },
+            
+                    // Wait for the payment to be authorized by the customer
+            
+                    onAuthorize: function(data, actions) {
+                        return actions.payment.execute().then(function() {
+                            window.alert('Payment Complete!');
+                        });
+                    }
+            
+                }, '#paypal-button-container');
+            
+            </script>
+        </div>
+    </section>
+
     <section id= "main" class="container">
         <div class="row">
         <aside class="col-lg-3  col-md-3 d-none d-lg-block d-md-block">
@@ -104,28 +168,14 @@
                     <img class="c-side" src="assets/images/mascotas.jpg" alt="">
             </div>
         </aside>
-    </div>
-
-    <div class="single-product page">
-
-			<div class="overlay"></div>
-
-			<div class="preview-large">
-				<h3>Single product view</h3>
-				<img src=""/>
-				<p></p>
-
-				<span class="close">×</span>
-			</div>
-
-	</div>
-
+    </div>   
+     
     </section>
     <!-- Footer -->
             <!-- Grid column -->
             <footer class="py-5 bg-dark">
                 <div class="container">
-                  <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+                  <p class="m-0 text-center text-white">Copyright &copy; Pommerce 2018</p>
                 </div>
                 <!-- /.container -->
             </footer>

@@ -24,15 +24,23 @@ $(document).ready(function() {
             })
     }
 
-    const ajaxCategory = (item) => {
+    const ajaxSingleProduct = (item) => {
         $.ajax({
-                url: `https://api.mercadolibre.com/sites/MLM/search?category=${item}`,
+                url: `https://api.mercadolibre.com/items?ids=${item}`,
                 type: 'GET',
                 datatype: 'json'
             })
             .done(function(response) {
                 console.log(response)
-                drawProducts(response.results);
+                let title = response[0].title;
+                console.log(title)
+                let price = response[0].price;
+                console.log(price)
+                let photo = response[0].secure_thumbnail;
+                console.log(photo)
+                let name = response[0].id;
+                console.log(name)
+                $('#container-Page').append(singleProductTemplate(price,title,photo,name));
             })
             .fail(function() {
                 console.log("error")
@@ -71,17 +79,16 @@ $(document).ready(function() {
         ajaxCategories()
     });
 
-    $("#logo").on("click", function(){
-        console.log("click")
-        window.location.hash = 'main';
-
-    })
-   
-
     $("#categories-list").on("click", ".category", function(){
         $('#main').empty();
         let item =$(this).html()
         ajaxProducts(item)
+    });
+
+    $("#main").on("click", ".buy", function(){
+       let item = $ (this).attr("id")
+       ajaxSingleProduct(item)
+       console.log("click")
     });
 
 
