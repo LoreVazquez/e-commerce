@@ -31,16 +31,13 @@ $(document).ready(function() {
                 datatype: 'json'
             })
             .done(function(response) {
-                console.log(response)
                 let title = response[0].title;
-                console.log(title)
                 let price = response[0].price;
-                console.log(price)
                 let photo = response[0].secure_thumbnail;
-                console.log(photo)
                 let name = response[0].id;
-                console.log(name)
                 $('#container-Page').append(singleProductTemplate(price,title,photo,name));
+                
+                
             })
             .fail(function() {
                 console.log("error")
@@ -86,10 +83,17 @@ $(document).ready(function() {
     });
 
     $("#main").on("click", ".buy", function(){
-       let item = $ (this).attr("id")
-       ajaxSingleProduct(item)
-       console.log("click")
+        let item = $ (this).attr("id")
+        $("#paypal").removeClass("d-none")
+        ajaxSingleProduct(item)
+        console.log("click")
     });
+
+    $("#container-Page").on("click", "#back", function(){
+        $("#paypal").addClass("d-none");
+        $('#container-Page').empty();
+    });
+
 
 
 

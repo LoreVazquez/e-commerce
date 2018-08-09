@@ -7,7 +7,7 @@ const template = (id,description,photo,price) => {
                         <h5>$${price}</h5>
                         <p class="card-text">${description}</p>
                     </div>
-                    <button id="${id}" type="button" class="btn btn-dark buy">Comprar</button>
+                    <a href="#logo" id="${id}" class="btn btn-dark buy">Comprar</a>
                     <div class="card-footer">
                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
                     </div>
@@ -22,6 +22,9 @@ const categoriesTemplate = (id,name) => {
 
 const singleProductTemplate = (price,title,photo,name) => {
     let t =`<div class="single_product_thumb clearfix container">
+                <div class="row">
+                    <button id="back" type="button" class="btn btn-outline-secondary">Regresar</button>
+                </div>
                <div class="row">
                    <img class= "col-6 single-page "src="${photo}" alt="">
                
