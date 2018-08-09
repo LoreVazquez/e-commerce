@@ -7,26 +7,16 @@ $(document).ready(function() {
             let price = ele.price;
             $('#main').append(template(id,description,photo,price));
         });
-    }
-
-
-    const template = (id,description,photo,price) => {
-        let t = `<div class= "element">
-                   <p class= "name">${id}</p>
-                   <img  src="${photo}"/>
-                   <p class= "name">${description}</p>
-                   <p class= "name">${price}</p>   
-                </div>`;
-        return t;
-    }
+    }  
 
     const ajaxProducts = (item) => {
         $.ajax({
-                url: `https://api.mercadolibre.com/sites/MLA/search?q=${item}`,
+                url: `https://api.mercadolibre.com/sites/MLM/search?q=${item}`,
                 type: 'GET',
                 datatype: 'json'
             })
             .done(function(response) {
+                console.log(response)
                 drawProducts(response.results);
             })
             .fail(function() {
@@ -34,10 +24,66 @@ $(document).ready(function() {
             })
     }
 
+    const ajaxCategory = (item) => {
+        $.ajax({
+                url: `https://api.mercadolibre.com/sites/MLM/search?category=${item}`,
+                type: 'GET',
+                datatype: 'json'
+            })
+            .done(function(response) {
+                console.log(response)
+                drawProducts(response.results);
+            })
+            .fail(function() {
+                console.log("error")
+            })
+        }
+
+        const ajaxCategories = () => {
+            $.ajax({
+                    url: `https://api.mercadolibre.com/sites/MLA/categories`,
+                    type: 'GET',
+                    datatype: 'json'
+                })
+                .done(function(response) {
+                    let data = response;
+                
+                    data.forEach(ele => {
+                        let id = ele.id;
+                        let name = ele.name;
+                        $('#categories-list').append(categoriesTemplate(id,name));
+                    });
+                })
+                .fail(function() {
+                    console.log("error")
+                })
+            };
+
     $("#item-search").on("click", function(){
         $('#main').empty();
         let item = $("#item-val").val()
         ajaxProducts(item)
     });
+
+    $("#categories").on("click", function(){
+        $('#categories-list').empty();
+        ajaxCategories()
+    });
+
+    let categories = $(".category");
+    console.log(categories)
+
+    categories.on("click", function(){
+        console.log("click")
+        alert("hola")
+        //$('#main').empty();
+        let item = $(this).attr("class")
+        let clase =$(this).attr("id")
+        console.log(clase)
+        $(window).trigger('hashchange')
+        //ajax(item)
+    });
+
+
     
 });

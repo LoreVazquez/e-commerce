@@ -1,0 +1,29 @@
+/*font-family: 'Pacifico', cursive;
+font-family: 'Acme', sans-serif;*/
+
+#logo{
+    font-family: 'Pacifico', cursive;
+}
+.c-side{
+    height: 100%;
+    width: 100%;
+}
+.c-center{
+    height: 70%;
+}
+.fit-content{
+    height: 100%;
+}
+
+.s-padding{
+    padding: 0%;
+}
+
+.color1{
+    color: darkslategrey;
+}
+
+.s-margin{
+    margin: 0%;
+    display: inline-block;
+}
