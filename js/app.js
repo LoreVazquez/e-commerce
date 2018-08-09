@@ -57,6 +57,7 @@ $(document).ready(function() {
                 .fail(function() {
                     console.log("error")
                 })
+    
             };
 
     $("#item-search").on("click", function(){
@@ -66,24 +67,23 @@ $(document).ready(function() {
     });
 
     $("#categories").on("click", function(){
-        $('#categories-list').empty();
+      $('#categories-list').empty();
         ajaxCategories()
     });
 
-    let categories = $(".category");
-    console.log(categories)
-
-    categories.on("click", function(){
+    $("#logo").on("click", function(){
         console.log("click")
-        alert("hola")
-        //$('#main').empty();
-        let item = $(this).attr("class")
-        let clase =$(this).attr("id")
-        console.log(clase)
-        $(window).trigger('hashchange')
-        //ajax(item)
+        window.location.hash = 'main';
+
+    })
+   
+
+    $("#categories-list").on("click", ".category", function(){
+        $('#main').empty();
+        let item =$(this).html()
+        ajaxProducts(item)
     });
 
 
-    
+
 });
